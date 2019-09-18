@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>show</title>
+    <script src="js/vue.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/myUtil.js"></script>
+    <script>
+        $(function () {
+            var msg = new Vue({
+                el:'#showMsg',
+                data:{
+                    msgs:''
+                },
+                created:function () {
+                    $.ajax({
+                        url:'/get',
+                        data:{id:getUrlParam("id")},
+                        dataType:'json',
+                        success:function(data){
+                            msg.msgs = data ;
+                        }
+                    })
+                },
+                filters:{
+                    formatDate:function (date) {
+                        return formatDate(date);
+                    }
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="showMsg">
+    <h1>{{msgs.title}}</h1>
+    <h2>{{msgs.createDate | formatDate }}</h2>
+    <p>{{msgs.content}}</p>
+</div>
+
+</body>
+</html>

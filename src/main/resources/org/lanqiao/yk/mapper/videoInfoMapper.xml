@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.yk.mapper.VideoInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.yk.entity.VideoInfo" >
+    <id column="video_id" property="videoId" jdbcType="INTEGER" />
+    <result column="video_name" property="videoName" jdbcType="VARCHAR" />
+    <result column="video_descript" property="videoDescript" jdbcType="VARCHAR" />
+    <result column="video_create_time" property="videoCreateTime" jdbcType="DATE" />
+    <result column="video_director" property="videoDirector" jdbcType="VARCHAR" />
+    <result column="video_actor" property="videoActor" jdbcType="VARCHAR" />
+    <result column="video_pic" property="videoPic" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    video_id, video_name, video_descript, video_create_time, video_director, video_actor, 
+    video_pic, category
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from video_info
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from video_info
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.yk.entity.VideoInfo" >
+    insert into video_info (video_id, video_name, video_descript, 
+      video_create_time, video_director, video_actor, 
+      video_pic, category)
+    values (#{videoId,jdbcType=INTEGER}, #{videoName,jdbcType=VARCHAR}, #{videoDescript,jdbcType=VARCHAR}, 
+      #{videoCreateTime,jdbcType=DATE}, #{videoDirector,jdbcType=VARCHAR}, #{videoActor,jdbcType=VARCHAR}, 
+      #{videoPic,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.yk.entity.VideoInfo" >
+    insert into video_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="videoName != null" >
+        video_name,
+      </if>
+      <if test="videoDescript != null" >
+        video_descript,
+      </if>
+      <if test="videoCreateTime != null" >
+        video_create_time,
+      </if>
+      <if test="videoDirector != null" >
+        video_director,
+      </if>
+      <if test="videoActor != null" >
+        video_actor,
+      </if>
+      <if test="videoPic != null" >
+        video_pic,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="videoId != null" >
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="videoName != null" >
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDescript != null" >
+        #{videoDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="videoCreateTime != null" >
+        #{videoCreateTime,jdbcType=DATE},
+      </if>
+      <if test="videoDirector != null" >
+        #{videoDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="videoActor != null" >
+        #{videoActor,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPic != null" >
+        #{videoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.yk.entity.VideoInfo" >
+    update video_info
+    <set >
+      <if test="videoName != null" >
+        video_name = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDescript != null" >
+        video_descript = #{videoDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="videoCreateTime != null" >
+        video_create_time = #{videoCreateTime,jdbcType=DATE},
+      </if>
+      <if test="videoDirector != null" >
+        video_director = #{videoDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="videoActor != null" >
+        video_actor = #{videoActor,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPic != null" >
+        video_pic = #{videoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.yk.entity.VideoInfo" >
+    update video_info
+    set video_name = #{videoName,jdbcType=VARCHAR},
+      video_descript = #{videoDescript,jdbcType=VARCHAR},
+      video_create_time = #{videoCreateTime,jdbcType=DATE},
+      video_director = #{videoDirector,jdbcType=VARCHAR},
+      video_actor = #{videoActor,jdbcType=VARCHAR},
+      video_pic = #{videoPic,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR}
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实验</title>
+    <script src="js/vue.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/myUtil.js"></script>
+    <script>
+        $(function(){
+            var msg = new Vue({
+                el:'#showMsg',
+                data:{
+                    msgs:''
+                },
+                filters:{
+                    formatDate:function (date) {
+                        return formatDate(date);
+                    }
+                },
+            })
+            $("button").click(function () {
+                $.ajax({
+                    url:'/search',
+                    data:{keyword:$("#keyword").val()},
+                    dataType:'json',
+                    success:function (data) {
+                        msg.msgs = data;
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<table border="1" width="400" id="showMsg">
+    <tr>
+        <td colspan="2"><input id="keyword" type="text"><button>search</button> </td>
+    </tr>
+    <tr>
+        <td>标题</td>
+        <td>时间</td>
+    </tr>
+    <tr v-for="(msg,index) in msgs">
+        <td><a :href="'show.html?id='+msg.id">{{msg.title}}</a></td>
+        <td>{{msg.createDate | formatDate}}</td>
+    </tr>
+</table>
+</body>
+</html>
